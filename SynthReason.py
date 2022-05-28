@@ -10,7 +10,7 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import random
-parameters = 75
+parameters = 150
 size = 200
 def convert(lst):
     return (lst.split())
@@ -69,8 +69,8 @@ with open("fileList.dat", encoding="utf8") as f:
                         prospect = convert(returnWords(dataY,var,varA))
                         if len(prospect) > 0:
                             varB = random.randint(0,len(prospect)-1)
-                            if var+varA < len(dataY) and var+varE < len(dataY) and var+varC < len(dataY):
-                                if len(dataY[var+varA]) == varC and len(dataY[var+varE]) == varD:
+                            if varB <= len(prospect)-1 and varE <= len(prospect)-1 and var+varC < len(dataX) and var+varD < len(dataX):
+                                if len(prospect[varB]) == len(dataX[var+varC]) and len(prospect[varE]) == len(dataX[var+varD]):
                                     dbA.append(varA)
                                     dbB.append(varB)
                                     dbC.append(varC)
@@ -89,8 +89,8 @@ with open("fileList.dat", encoding="utf8") as f:
                             varE = dbE[i]
                             varF = dbF[i]
                             if var+varB < len(dataX) and var+varD < len(dataX) and var+varF < len(dataX):
-                                if len(dataX[var+varA]) == varC and len(dataX[var+varE]) == varD:
-                                    sync += returnWords(dataX,var,varB)
+                                if len(dataX[var+varB]) == varD and len(dataX[var+varC]) == varE:
+                                    sync += returnWords(dataX,var,varA)
                                     break
                         m+=1
                     k += 1
