@@ -11,7 +11,7 @@
 #	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import random
 parameters = 75
-size = 100
+size = 200
 def convert(lst):
     return (lst.split())
 def process(user,file):
@@ -51,27 +51,47 @@ with open("fileList.dat", encoding="utf8") as f:
                 data = x.read()
             dataX = convert(data)
             dataY = convert(process(user,file.strip()))
-            db = []
+            dbA = []
+            dbB = []
+            dbC = []
+            dbD = []
+            dbE = []
+            dbF = []
             if len(dataY) > 0:
-                while(n < parameters and var < len(dataX) and var < len(dataY)):
-                    var +=1
+                while(n < parameters):
+                    var = random.randint(0,len(dataY))
                     varA = random.randint(0,7)
-                    varB = random.randint(0,7)
-                    if returnWords(dataY,var,varA).find(dataX[var+varB]) > -1:
-                        db.append(varA)
-                        db.append(varB)
-                        n+=1
+                    varC = random.randint(0,7)
+                    varD = random.randint(0,7)
+                    varE = random.randint(0,7)
+                    varF = random.randint(0,7)
+                    if len(dataY) > var+varA and len(dataY) > var+varF:
+                        prospect = convert(returnWords(dataY,var,varA))
+                        if len(prospect) > 0:
+                            varB = random.randint(0,len(prospect)-1)
+                            if var+varA < len(dataY) and var+varE < len(dataY) and var+varC < len(dataY):
+                                if len(dataY[var+varA]) == varC and len(dataY[var+varE]) == varD:
+                                    dbA.append(varA)
+                                    dbB.append(varB)
+                                    dbC.append(varC)
+                                    dbD.append(varD)
+                                    dbE.append(varE)
+                                    dbF.append(varF)
+                                    n+=1
                 while(m < size):
                     var = random.randint(0,len(dataX)-10)
                     if var < len(dataX)-5:
-                        i = len(db)-2
-                        while(i > 0):
-                            varA = db[i]
-                            varB = db[i+1]
-                            i-=1
-                            if len(dataX[var+db[i+1]])> db[i]:
-                                sync += returnWords(dataY,var,varB) and returnWords(dataY,var,varA)
-                                break
+                        for i in dbA:
+                            varA = dbA[i]
+                            varB = dbB[i]
+                            varC = dbC[i]
+                            varD = dbD[i]
+                            varE = dbE[i]
+                            varF = dbF[i]
+                            if var+varB < len(dataX) and var+varD < len(dataX) and var+varF < len(dataX):
+                                if len(dataX[var+varA]) == varC and len(dataX[var+varE]) == varD:
+                                    sync += returnWords(dataX,var,varB)
+                                    break
                         m+=1
                     k += 1
                     if k > 100:
