@@ -51,47 +51,27 @@ with open("fileList.dat", encoding="utf8") as f:
                 data = x.read()
             dataX = convert(data)
             dataY = convert(process(user,file.strip()))
-            dbA = []
-            dbB = []
-            dbC = []
-            dbD = []
-            dbE = []
-            dbF = []
+            db = []
             if len(dataY) > 0:
                 while(n < parameters and var < len(dataX) and var < len(dataY)):
                     var +=1
-                    varA = random.randint(0,17)
-                    varC = random.randint(0,17)
-                    varD = random.randint(0,17)
-                    varE = random.randint(0,17)
-                    varF = random.randint(0,17)
-                    if len(dataY) > var+varA and len(dataY) > var+varF:
-                        prospect = convert(returnWords(dataY,var,varA))
-                        if len(prospect) > 0:
-                            varB = random.randint(0,len(prospect)-1)
-                            if varB <= len(prospect)-1 and varC <= len(prospect)-1 and varD <= len(prospect)-1 and varE <= len(prospect)-1:
-                                if len(prospect[varB]) == len(prospect[varC]) and len(prospect[varE]) == len(prospect[varD]):
-                                    dbA.append(varA)
-                                    dbB.append(varB)
-                                    dbC.append(varC)
-                                    dbD.append(varD)
-                                    dbE.append(varE)
-                                    dbF.append(varF)
-                                    n+=1
+                    varA = random.randint(0,7)
+                    varB = random.randint(0,7)
+                    if returnWords(dataY,var,varA).find(dataX[var+varB]) > -1:
+                        db.append(varA)
+                        db.append(varB)
+                        n+=1
                 while(m < size):
                     var = random.randint(0,len(dataX)-10)
                     if var < len(dataX)-5:
-                        for i in dbA:
-                            varA = dbA[i]
-                            varB = dbB[i]
-                            varC = dbC[i]
-                            varD = dbD[i]
-                            varE = dbE[i]
-                            varF = dbF[i]
-                            if var+varB < len(dataX) and var+varD < len(dataX) and var+varF < len(dataX):
-                                if len(dataX[var+varB]) == varC and len(dataX[var+varD]) == varE:
-                                    sync += returnWords(dataX,var,varA)
-                                    break
+                        i = len(db)-2
+                        while(i > 0):
+                            varA = db[i]
+                            varB = db[i+1]
+                            i-=1
+                            if len(dataX[var+db[i+1]])> db[i]:
+                                sync += returnWords(dataY,var,varB) and returnWords(dataY,var,varA)
+                                break
                         m+=1
                     k += 1
                     if k > 100:
