@@ -10,8 +10,8 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import random
-parameters = 150
-size = 200
+parameters = 75
+size = 100
 def convert(lst):
     return (lst.split())
 def process(user,file):
@@ -58,19 +58,19 @@ with open("fileList.dat", encoding="utf8") as f:
             dbE = []
             dbF = []
             if len(dataY) > 0:
-                while(n < parameters):
-                    var = random.randint(0,len(dataY))
-                    varA = random.randint(0,7)
-                    varC = random.randint(0,7)
-                    varD = random.randint(0,7)
-                    varE = random.randint(0,7)
-                    varF = random.randint(0,7)
+                while(n < parameters and var < len(dataX) and var < len(dataY)):
+                    var +=1
+                    varA = random.randint(0,17)
+                    varC = random.randint(0,17)
+                    varD = random.randint(0,17)
+                    varE = random.randint(0,17)
+                    varF = random.randint(0,17)
                     if len(dataY) > var+varA and len(dataY) > var+varF:
                         prospect = convert(returnWords(dataY,var,varA))
                         if len(prospect) > 0:
                             varB = random.randint(0,len(prospect)-1)
-                            if varB <= len(prospect)-1 and varE <= len(prospect)-1 and var+varC < len(dataX) and var+varD < len(dataX):
-                                if len(prospect[varB]) == len(dataX[var+varC]) and len(prospect[varE]) == len(dataX[var+varD]):
+                            if varB <= len(prospect)-1 and varC <= len(prospect)-1 and varD <= len(prospect)-1 and varE <= len(prospect)-1:
+                                if len(prospect[varB]) == len(prospect[varC]) and len(prospect[varE]) == len(prospect[varD]):
                                     dbA.append(varA)
                                     dbB.append(varB)
                                     dbC.append(varC)
@@ -89,7 +89,7 @@ with open("fileList.dat", encoding="utf8") as f:
                             varE = dbE[i]
                             varF = dbF[i]
                             if var+varB < len(dataX) and var+varD < len(dataX) and var+varF < len(dataX):
-                                if len(dataX[var+varB]) == varD and len(dataX[var+varC]) == varE:
+                                if len(dataX[var+varB]) == varC and len(dataX[var+varD]) == varE:
                                     sync += returnWords(dataX,var,varA)
                                     break
                         m+=1
