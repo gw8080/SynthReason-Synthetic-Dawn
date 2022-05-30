@@ -57,6 +57,7 @@ with open("fileList.dat", encoding="utf8") as f:
             dbD = []
             dbE = []
             dbF = []
+            dbX = []
             if len(dataY) > 0:
                 while(n < parameters):
                     var = random.randint(0,len(dataY))
@@ -71,8 +72,10 @@ with open("fileList.dat", encoding="utf8") as f:
                             varB = random.randint(0,len(prospect)-1)
                             if var+varA < len(dataY) and var+varB < len(dataY) and var+varC < len(dataY) and var+varD < len(dataY):
                                 if len(dataY[var+varA]) == varB and len(dataY[var+varC]) == varD:
+                                    dbX.append(returnWords(convert(data),var,varA))
                                     sync += returnWords(convert(data),var,varA)
                                     n+=1
+                dataY = dbX
                 if len(sync) > 0:
                     print()
                     print("using",file.strip())
