@@ -70,13 +70,14 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
         x = 0
         counter = 0
         counterB = 0
-        while(stat < len(convert(user)) and counterB < len(files)/2):
+        while(stat < len(convert(user)) and counterB < len(files)):
             stat = 0
             counterB += 1
             random.shuffle(files)
             for file in files: 
                 sync = ""
                 data = convert(process(user,file.strip()))
+                xxx = ''.join(data)
                 if len(data) > 100:
                     n = 1
                     counter = 0
@@ -90,8 +91,8 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                                 n+=1
                         counter += 1
                         if counter > 100:
-                            prevA = ''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
-                            prevB = ''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
+                            prevA = xxx.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
+                            prevB = xxx.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
                             n = prevA*prevB
                             counter = 0
                             n+=1
@@ -100,9 +101,9 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     stat = 0
                     words = convert(user)
                     for word in words:
-                        if sync.find(" " + word + " " ) > -1 and len(word) > 0:
+                        if sync.find(" " + word + " " ) > -1 and len(word) > 1:
                             stat+=1
-                if len(sync) > 0 and stat > len(convert(user))/2:
+                if len(convert(sync)) > size and stat > len(convert(user))/2:
                     print()                
                     syncB = formatSentences(sync)
                     print("using" ,file.strip())
