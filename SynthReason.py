@@ -92,9 +92,10 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                                 n+=1
                         counter += 1
                         if counter > 100:
-                            prevA = user.find(" " + db[random.randint(0,len(db)-1)] + " ",prevA+1)
-                            prevB = user.find(" " + db[random.randint(0,len(db)-1)] + " ",prevB+1)
-                            n = round(math.sqrt(prevA*prevB))
+                            prevA = user.find(" " + data[random.randint(0,len(data)-1)] + " ",prevA+1)
+                            prevB = user.find(" " + data[random.randint(0,len(data)-1)] + " ",prevB+1)
+                            if prevA > 0 and prevB > 0:
+                          	  n = round(math.sqrt(prevA+prevB))
                             counter = 0
                             n+=1
                         if len(convert(sync)) >= size:
