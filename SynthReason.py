@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 import re
-size = 25
+size = 100
 targetNgramSize = 3
 spread = 10
 def convert(lst):
