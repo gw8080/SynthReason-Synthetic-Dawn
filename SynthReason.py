@@ -30,6 +30,11 @@ import math
 size = 100
 targetNgramSize = 3
 spread = 10
+def index_of(val, in_list):
+    try:
+        return in_list.index(val)
+    except ValueError:
+        return -1 
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -46,8 +51,8 @@ def process(user,file):
     sentences = text.split('.')
     output = ""
     sentences = sorted(sentences)
+    words = convert(user)
     for line in sentences:
-        words = convert(user)
         for word in words:
             if line.find(" " + word + " ") > -1:
                 output += line + ". "
@@ -85,7 +90,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevA = 0
                     prevB = 0
                     while(n < len(data) and n > 0):
-                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
+                        string = returnWords(data,random.randint(1,len(data)),random.randint(targetNgramSize,targetNgramSize*2))
                         if len(string) == len(returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))):
                             if sync.find(string) == -1:
                                 sync += string
