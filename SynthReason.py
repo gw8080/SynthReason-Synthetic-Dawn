@@ -89,17 +89,14 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevA = 0
                     prevB = 0
                     while(n < len(data) and n > 0):
+                        n = index_of(convert(user)[random.randint(0,len(convert(user))-1)], data)+1
                         string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
                         if len(string) == len(returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))):
                             if sync.find(string) == -1:
                                 sync += string
                                 n+=1
                         counter += 1
-                        if counter > 100:
-                            prevA = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
-                            prevB = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
-                            if prevA > 0 and prevB > 0:
-                          	  n = round(math.sqrt(prevA+prevB))
+                        if counter > 50:
                             counter = 0
                             n+=1
                         if len(convert(sync)) >= size:
