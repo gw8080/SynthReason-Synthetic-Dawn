@@ -1,89 +1,117 @@
-#	SynthReason - Synthetic Dawn - intelligent symbolic manipulation
-#	Copyright (C) 2022 George Wagenknecht
-#	it under the terms of the GNU General Public License as published by
-#	the Free Software Foundation, either version 3 of the License, or
-#	(at your option) any later version.
-#	This program is distributed in the hope that it will be useful,
-#	but WITHOUT ANY WARRANTY; without even the implied warranty of
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#	GNU General Public License for more details.
-#	You should have received a copy of the GNU General Public License
-#	along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# SynthReason - Synthetic Dawn - intelligent symbolic manipulation
+# BSD 2-Clause License
+# 
+# Copyright (c) 2022, GeorgeFW1101 - George Wagenknecht
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
-parameters = 50
-size = 200
+import re
+size = 100
+targetNgramSize = 3
+spread = 10
 def convert(lst):
     return (lst.split())
+def formatSentences(sync):
+    sentences = sync.split('.')
+    i = 0
+    total = ""
+    while(i < len(sentences)-1):
+        total += sentences[i] + "."
+        i += 1
+    return total
 def process(user,file):
-    with open(file, encoding="utf8") as f:
+    with open(file, encoding='ISO-8859-1') as f:
         text = f.read()
     sentences = text.split('.')
     output = ""
     sentences = sorted(sentences)
     for line in sentences:
-        words = sorted(convert(user), reverse = False)
-        stat = 0
+        words = convert(user)
         for word in words:
-            if line.find(word) > -1:
-                output += line + " "
+            if line.find(" " + word + " ") > -1:
+                output += line + ". "
                 break
     return output
 def returnWords(dataX,pos,length):
     ngram = ""
     n = 0
-    while(n < length and pos+n < len(dataX)):
+    while(n < length and pos+length < len(dataX)):
         ngram += dataX[pos+n] + " "
         n+=1
     return ngram
-with open("fileList.dat", encoding="utf8") as f:
+with open("fileList.conf", encoding='ISO-8859-1') as f:
     files = f.readlines()
     print("SynthReason - Synthetic Dawn")
     while(True):
-        user = input("USER: ")
+        print()
+        user = re.sub('\W+',' ',input("USER: "))
         filename = "Compendium#" + user + "#" + str(random.randint(0,10000000)) + ".txt"
-        for file in files:       
-            sync = ""
-            m = 0
-            n = 0
-            k = 0
-            var = 0
-            with open(file.strip(), encoding="utf8") as x:
-                data = x.read()
-            dataX = convert(data)
-            dataY = convert(process(user,file.strip()))
-            dbA = []
-            dbB = []
-            dbC = []
-            dbD = []
-            dbE = []
-            dbF = []
-            dbX = []
-            if len(dataY) > 0:
-                while(n < parameters):
-                    var = random.randint(0,len(dataY))
-                    varA = random.randint(0,7)
-                    varC = random.randint(0,7)
-                    varD = random.randint(0,7)
-                    varE = random.randint(0,7)
-                    varF = random.randint(0,7)
-                    if len(dataY) > var+varA and len(dataY) > var+varF:
-                        prospect = convert(returnWords(dataY,var,varA))
-                        if len(prospect) > 0:
-                            varB = random.randint(0,len(prospect)-1)
-                            if var+varA < len(dataY) and var+varB < len(dataY) and var+varC < len(dataY) and var+varD < len(dataY):
-                                if len(dataY[var+varA]) == varB and len(dataY[var+varC]) == varD:
-                                    dbX.append(returnWords(convert(data),var,varA))
-                                    sync += returnWords(convert(data),var,varA)
-                                    n+=1
-                dataY = dbX
-                if len(sync) > 0:
-                    print()
-                    print("using",file.strip())
-                    print(sync)
+        stat = 0
+        x = 0
+        counter = 0
+        counterB = 0
+        while(stat < len(convert(user)) and counterB < len(files)/2):
+            stat = 0
+            counterB += 1
+            random.shuffle(files)
+            for file in files: 
+                sync = ""
+                data = convert(process(user,file.strip()))
+                if len(data) > 100:
+                    n = sync.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",random.randint(0,len(data)-1))*''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",random.randint(0,len(data)-1))
+                    counter = 0
+                    while(n < len(data) and n > 0):
+                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
+                        if len(string) == len(returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))):
+                            if sync.find(string) == -1:
+                                sync += string
+                                n+=1
+                        counter += 1
+                        if counter > 100:
+                            counter = 0
+                            n+=1
+                        if len(convert(sync)) >= size:
+                            break
+                    stat = 0
+                    words = convert(user)
+                    for word in words:
+                        if sync.find(" " + word + " " ) > -1 and len(word) > 0:
+                            stat+=1
+                if len(sync) > 0 and stat > len(convert(user))/2:
+                    print()                
+                    syncB = formatSentences(sync)
+                    print("using" ,file.strip())
+                    print("AI:" ,syncB)
                     f = open(filename, "a", encoding="utf8")
+                    f.write("\n")
                     f.write("using " + file.strip())
                     f.write("\n")
-                    f.write(sync)
+                    f.write(syncB)
                     f.write("\n")
                     f.write("\n")
                     f.close()
+                    x+=1
+                    if x >= spread:
+                        break
+            if x >= spread:
+                break
