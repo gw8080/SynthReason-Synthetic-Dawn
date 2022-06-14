@@ -78,8 +78,10 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                 sync = ""
                 data = convert(process(user,file.strip()))
                 if len(data) > 100:
-                    n = sync.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",random.randint(0,len(data)-1))*''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",random.randint(0,len(data)-1))
+                    n = 1
                     counter = 0
+                    prevA = 0
+                    prevB = 0
                     while(n < len(data) and n > 0):
                         string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
                         if len(string) == len(returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))):
@@ -88,6 +90,9 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                                 n+=1
                         counter += 1
                         if counter > 100:
+                            prevA = ''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
+                            prevB = ''.join(data).find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
+                            n = prevA*prevB
                             counter = 0
                             n+=1
                         if len(convert(sync)) >= size:
