@@ -92,8 +92,8 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                                 n+=1
                         counter += 1
                         if counter > 100:
-                            prevA = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
-                            prevB = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
+                            prevA = user.find(" " + db[random.randint(0,len(db)-1)] + " ",prevA+1)
+                            prevB = user.find(" " + db[random.randint(0,len(db)-1)] + " ",prevB+1)
                             n = round(math.sqrt(prevA*prevB))
                             counter = 0
                             n+=1
@@ -104,7 +104,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     for word in words:
                         if sync.find(" " + word + " " ) > -1 and len(word) > 0:
                             stat+=1
-                if len(convert(sync)) > size and stat > len(convert(user))/3:
+                if len(convert(sync)) > size and stat > len(convert(user))/2.5:
                     print()                
                     syncB = formatSentences(sync)
                     print("using" ,file.strip())
