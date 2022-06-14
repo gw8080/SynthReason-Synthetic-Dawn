@@ -50,7 +50,6 @@ def process(user,file):
         text = f.read()
     sentences = text.split('.')
     output = ""
-    sentences = sorted(sentences)
     words = convert(user)
     for line in sentences:
         for word in words:
@@ -90,15 +89,15 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevA = 0
                     prevB = 0
                     while(n < len(data) and n > 0):
-                        string = returnWords(data,random.randint(1,len(data)),random.randint(targetNgramSize,targetNgramSize*2))
+                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
                         if len(string) == len(returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))):
                             if sync.find(string) == -1:
                                 sync += string
                                 n+=1
                         counter += 1
                         if counter > 100:
-                            prevA = user.find(" " + data[random.randint(0,len(data)-1)] + " ",prevA+1)
-                            prevB = user.find(" " + data[random.randint(0,len(data)-1)] + " ",prevB+1)
+                            prevA = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
+                            prevB = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
                             if prevA > 0 and prevB > 0:
                           	  n = round(math.sqrt(prevA+prevB))
                             counter = 0
