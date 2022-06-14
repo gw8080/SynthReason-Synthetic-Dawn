@@ -78,7 +78,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
             for file in files: 
                 sync = ""
                 data = convert(process(user,file.strip()))
-                xxx = ''.join(data)
+                db = ''.join(data)
                 if len(data) > 100:
                     n = 1
                     counter = 0
@@ -92,8 +92,8 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                                 n+=1
                         counter += 1
                         if counter > 100:
-                            prevA = xxx.find(" " + xxx[random.randint(0,len(xxx)-1)] + " ",prevA+1)
-                            prevB = xxx.find(" " + xxx[random.randint(0,len(xxx)-1)] + " ",prevB+1)
+                            prevA = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevA+1)
+                            prevB = db.find(" " + convert(user)[random.randint(0,len(convert(user))-1)] + " ",prevB+1)
                             n = round(math.sqrt(prevA*prevB))
                             counter = 0
                             n+=1
