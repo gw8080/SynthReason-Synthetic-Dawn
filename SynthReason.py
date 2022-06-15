@@ -27,7 +27,7 @@
 import random
 import re
 import math
-size = 25
+size = 100
 targetNgramSize = 3
 spread = 10
 def index_of(val, in_list):
