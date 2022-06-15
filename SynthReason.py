@@ -93,13 +93,15 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevB = 0
                     A = 1
                     while(n < len(data) and n > 0):
-                        n = index_of(convert(user)[random.randint(0,len(convert(user))-1)], data)+1
-                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
-                        if len(string) == len(returnWords(dataB,n,random.randint(1,A))):
-                            if sync.find(string) == -1:
-                                sync += string
-                                n+=1
-                                A+=1
+                        
+                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,A))
+                        if len(string) > 0:
+                            n = index_of(convert(string)[random.randint(0,len(convert(string))-1)], data)+1
+                            if len(string) == len(returnWords(dataB,n,random.randint(1,A))):
+                                if sync.find(string) == -1:
+                                    sync += string
+                                    n+=1
+                                    A+=1
                         counter += 1
                         if counter > 150:
                             counter = 0
