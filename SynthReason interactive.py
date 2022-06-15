@@ -1,7 +1,7 @@
 # SynthReason - Synthetic Dawn - intelligent symbolic manipulation
 # BSD 2-Clause License
 # 
-# Copyright (c) 2022, GeorgeFW1101 - George Wagenknecht
+# Copyright (c) 2022, gw8080 - George Wagenknecht
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
