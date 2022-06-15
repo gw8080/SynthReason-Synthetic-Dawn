@@ -29,7 +29,7 @@ import re
 import math
 size = 100
 targetNgramSize = 3
-spread = 10
+spread = 3
 def index_of(val, in_list):
     try:
         return in_list.index(val)
@@ -67,10 +67,12 @@ def returnWords(dataX,pos,length):
 with open("fileList.conf", encoding='ISO-8859-1') as f:
     files = f.readlines()
     print("SynthReason - Synthetic Dawn")
-    while(True):
+    with open("questions.conf", encoding='ISO-8859-1') as f:
+    	questions = f.readlines()
+    filename = "Compendium#" + str(random.randint(0,10000000)) + ".txt"
+    for question in questions:
         print()
-        user = re.sub('\W+',' ',input("USER: "))
-        filename = "Compendium#" + user + "#" + str(random.randint(0,10000000)) + ".txt"
+        user = re.sub('\W+',' ',question)
         stat = 0
         x = 0
         counter = 0
@@ -93,7 +95,6 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevB = 0
                     A = 1
                     while(n < len(data) and n > 0):
-                        
                         string = returnWords(data,random.randint(1,len(data)),random.randint(1,A))
                         if len(string) > 0:
                             n = index_of(convert(string)[random.randint(0,len(convert(string))-1)], data)+1
@@ -116,11 +117,11 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                 if len(convert(sync)) > size and stat > len(convert(user))/2.5:
                     print()                
                     syncB = formatSentences(sync)
-                    print("using" ,file.strip())
+                    print("using" ,file.strip() + "," ,"answering:", user)
                     print("AI:" ,syncB)
                     f = open(filename, "a", encoding="utf8")
                     f.write("\n")
-                    f.write("using " + file.strip())
+                    f.write("using " + file.strip() + ", answering: " + user)
                     f.write("\n")
                     f.write(syncB)
                     f.write("\n")
