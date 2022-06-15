@@ -70,6 +70,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
     with open("questions.conf", encoding='ISO-8859-1') as f:
     	questions = f.readlines()
     filename = "Compendium#" + str(random.randint(0,10000000)) + ".txt"
+    random.shuffle(questions)
     for question in questions:
         print()
         user = re.sub('\W+',' ',question)
