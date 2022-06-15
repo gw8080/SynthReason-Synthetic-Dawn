@@ -28,7 +28,7 @@ import random
 import re
 size = 100
 targetNgramSize = 3
-spread = 10
+spread = 3
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -108,11 +108,11 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                 if len(convert(sync)) > size and stat > len(convert(user))/2.5:
                     print()                
                     syncB = formatSentences(sync)
-                    print("using" ,file.strip())
+                    print("using" ,file.strip(), "answering:", user)
                     print("AI:" ,syncB)
                     f = open(filename, "a", encoding="utf8")
                     f.write("\n")
-                    f.write("using " + file.strip())
+                    f.write("using " + file.strip() + " answering: " + user)
                     f.write("\n")
                     f.write(syncB)
                     f.write("\n")
@@ -123,4 +123,5 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                         break
             if x >= spread:
                 break
+
 
