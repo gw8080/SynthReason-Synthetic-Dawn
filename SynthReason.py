@@ -88,9 +88,9 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     prevB = 0
                     n = random.randint(1,len(data))
                     while(n < len(data) and n > 0):
-                        string = returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(2,4)))
+                        string = returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,2)))
                         stringB = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
-                        if string.find("a") + string.find("e") + string.find("i") + string.find("o") + string.find("u") < stringB.find("b") + stringB.find("c") + stringB.find("d") + stringB.find("f") + stringB.find("g") + stringB.find("h") + stringB.find("j") + stringB.find("k") + stringB.find("l") + stringB.find("m") + stringB.find("n") + stringB.find("p") + stringB.find("q") + stringB.find("r") + stringB.find("s") + stringB.find("t") + stringB.find("v") + stringB.find("w") + stringB.find("x") + stringB.find("y") + stringB.find("z"):
+                        if string.find("a") + string.find("e") + string.find("i") + string.find("o") + string.find("u") == stringB.find("b") + stringB.find("c") + stringB.find("d") + stringB.find("f") + stringB.find("g") + stringB.find("h") + stringB.find("j") + stringB.find("k") + stringB.find("l") + stringB.find("m") + stringB.find("n") + stringB.find("p") + stringB.find("q") + stringB.find("r") + stringB.find("s") + stringB.find("t") + stringB.find("v") + stringB.find("w") + stringB.find("x") + stringB.find("y") + stringB.find("z"):
                             if sync.find(stringB) == -1:
                                 sync += stringB
                                 n+=1
