@@ -78,7 +78,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
         x = 0
         counter = 0
         counterB = 0
-        while(stat < len(convert(user)) and counterB < len(files)):
+        while(stat < len(convert(user))/2.5 and counterB < len(files)/4):
             stat = 0
             counterB += 1
             random.shuffle(files)
@@ -101,7 +101,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                             n = index_of(convert(string)[random.randint(0,len(convert(string))-1)], data)+1
                             if len(string) == len(returnWords(dataB,n,random.randint(1,A))):
                                 if sync.find(string) == -1:
-                                    sync += string
+                                    sync = string + sync
                                     n+=1
                                     A+=1
                         counter += 1
