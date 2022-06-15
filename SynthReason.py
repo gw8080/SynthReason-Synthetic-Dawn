@@ -79,7 +79,10 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
             stat = 0
             counterB += 1
             random.shuffle(files)
-            for file in files: 
+            for file in files:
+                with open(file.strip(), encoding='ISO-8859-1') as f:
+                    text = f.read()
+                    dataB = convert(text)
                 sync = ""
                 data = convert(process(user,file.strip()))
                 db = ''.join(data)
@@ -92,7 +95,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     while(n < len(data) and n > 0):
                         n = index_of(convert(user)[random.randint(0,len(convert(user))-1)], data)+1
                         string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
-                        if len(string) == len(returnWords(data,n,random.randint(1,A))):
+                        if len(string) == len(returnWords(dataB,n,random.randint(1,A))):
                             if sync.find(string) == -1:
                                 sync += string
                                 n+=1
@@ -126,3 +129,4 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                         break
             if x >= spread:
                 break
+
