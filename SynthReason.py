@@ -26,14 +26,10 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 import re
+import math
 size = 100
 targetNgramSize = 3
-spread = 3
-def index_of(val, in_list):
-    try:
-        return in_list.index(val)
-    except ValueError:
-        return -1 
+spread = 10
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -49,8 +45,9 @@ def process(user,file):
         text = f.read()
     sentences = text.split('.')
     output = ""
-    words = convert(user)
+    sentences = sorted(sentences)
     for line in sentences:
+        words = convert(user)
         for word in words:
             if line.find(" " + word + " ") > -1:
                 output += line + ". "
@@ -77,14 +74,11 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
         x = 0
         counter = 0
         counterB = 0
-        while(stat < len(convert(user))/2.5 and counterB < len(files)/4):
+        while(stat < len(convert(user)) and counterB < len(files)):
             stat = 0
             counterB += 1
             random.shuffle(files)
-            for file in files:
-                with open(file.strip(), encoding='ISO-8859-1') as f:
-                    text = f.read()
-                    dataB = convert(text)
+            for file in files: 
                 sync = ""
                 data = convert(process(user,file.strip()))
                 db = ''.join(data)
@@ -93,18 +87,16 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     counter = 0
                     prevA = 0
                     prevB = 0
-                    A = 1
+                    n = random.randint(1,len(data))
                     while(n < len(data) and n > 0):
-                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,A))
-                        if len(string) > 0:
-                            n = index_of(convert(string)[random.randint(0,len(convert(string))-1)], data)+1
-                            if len(string)/len(returnWords(dataB,n,random.randint(1,targetNgramSize))) == len(returnWords(dataB,n,random.randint(1,A)))/len(convert(string)):
-                                if sync.find(string) == -1:
-                                    sync += string
-                                    n+=1
-                                    A+=1
+                        string = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
+                        stringB = returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,3)))
+                        if string.find("a") + string.find("e") + string.find("i") + string.find("o") + string.find("u") > stringB.find("b") + stringB.find("c") + stringB.find("d") + stringB.find("f") + stringB.find("g") + stringB.find("h") + stringB.find("j") + stringB.find("k") + stringB.find("l") + stringB.find("m") + stringB.find("n") + stringB.find("p") + stringB.find("q") + stringB.find("r") + stringB.find("s") + stringB.find("t") + stringB.find("v") + stringB.find("w") + stringB.find("x") + stringB.find("y") + stringB.find("z"):
+                            if sync.find(string) == -1:
+                                sync += string
+                                n+=1
                         counter += 1
-                        if counter > 150:
+                        if counter > 100:  
                             counter = 0
                             n+=1
                         if len(convert(sync)) >= size:
@@ -117,11 +109,11 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                 if len(convert(sync)) > size and stat > len(convert(user))/2.5:
                     print()                
                     syncB = formatSentences(sync)
-                    print("using" ,file.strip() + "," ,"answering:", user)
+                    print("using" ,file.strip())
                     print("AI:" ,syncB)
                     f = open(filename, "a", encoding="utf8")
                     f.write("\n")
-                    f.write("using " + file.strip() + ", answering: " + user)
+                    f.write("using " + file.strip())
                     f.write("\n")
                     f.write(syncB)
                     f.write("\n")
