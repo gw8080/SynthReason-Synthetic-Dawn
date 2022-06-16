@@ -128,7 +128,3 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                         break
             if x >= spread:
                 break
-
-
-
-
