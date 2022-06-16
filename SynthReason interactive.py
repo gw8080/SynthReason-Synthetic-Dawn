@@ -1,7 +1,7 @@
 # SynthReason - Synthetic Dawn - intelligent symbolic manipulation
 # BSD 2-Clause License
 # 
-# Copyright (c) 2022, gw8080 - George Wagenknecht
+# Copyright (c) 2022, GeorgeFW1101 - George Wagenknecht
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -29,6 +29,11 @@ import re
 size = 100
 targetNgramSize = 3
 spread = 3
+def index_of(val, in_list):
+    try:
+        return in_list.index(val)
+    except ValueError:
+        return -1
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -83,7 +88,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     counter = 0
                     prevA = 0
                     prevB = 0
-                    n = random.randint(1,len(data))
+                    n = index_of((convert(user)[random.randint(0,len(convert(user))-1)]),data)+1
                     while(n < len(data) and n > 0):
                         string = returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,2)))
                         stringB = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))

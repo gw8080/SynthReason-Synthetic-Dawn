@@ -29,6 +29,11 @@ import re
 size = 100
 targetNgramSize = 3
 spread = 3
+def index_of(val, in_list):
+    try:
+        return in_list.index(val)
+    except ValueError:
+        return -1
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -86,11 +91,11 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                     counter = 0
                     prevA = 0
                     prevB = 0
-                    n = random.randint(1,len(data))
+                    n = index_of((convert(user)[random.randint(0,len(convert(user))-1)]),data)+1
                     while(n < len(data) and n > 0):
                         string = returnWords(data,n,random.randint(targetNgramSize,targetNgramSize*random.randint(1,2)))
                         stringB = returnWords(data,random.randint(1,len(data)),random.randint(1,targetNgramSize))
-                        if string.find("a") + string.find("e") + string.find("i") + string.find("o") + string.find("u") == stringB.find("b") + stringB.find("c") + stringB.find("d") + stringB.find("f") + stringB.find("g") + stringB.find("h") + stringB.find("j") + stringB.find("k") + stringB.find("l") + stringB.find("m") + stringB.find("n") + stringB.find("p") + stringB.find("q") + stringB.find("r") + stringB.find("s") + stringB.find("t") + stringB.find("v") + stringB.find("w") + stringB.find("x") + stringB.find("y") + stringB.find("z"):
+                        if stringB.find("a") + string.find("e") + stringB.find("i") + string.find("o") + stringB.find("u") == string.find("b") + stringB.find("c") + string.find("d") + stringB.find("f") + string.find("g") + stringB.find("h") + string.find("j") + stringB.find("k") + string.find("l") + stringB.find("m") + string.find("n") + stringB.find("p") + string.find("q") + stringB.find("r") + string.find("s") + stringB.find("t") + string.find("v") + stringB.find("w") + string.find("x") + stringB.find("y") + string.find("z"):
                             if sync.find(stringB) == -1:
                                 sync += stringB
                                 n+=1
@@ -123,6 +128,7 @@ with open("fileList.conf", encoding='ISO-8859-1') as f:
                         break
             if x >= spread:
                 break
+
 
 
 
