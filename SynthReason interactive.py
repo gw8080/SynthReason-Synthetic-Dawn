@@ -36,8 +36,6 @@ def processB(data,file):
             text = f.read()
         ini = random.randint(0,len(data))
         string = returnWords(data,ini,targetNgramSize)
-        ini = random.randint(0,len(data))
-        stringX = returnWords(data,ini,targetNgramSize)
         words = convert(string)
         x = 0
         for word in words:
@@ -47,7 +45,7 @@ def processB(data,file):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
-                if string.find(" " + stringX + " ") > -1 or string.find(" " + totalA + " ") == -1:
+                if string.find(" " + word + " ") > -1 and string.find(" " + totalA + " ") == -1:
                     return string
         return ""
 def convert(lst):
@@ -124,8 +122,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
             print()
             syncB = formatSentences(sync)
             words = convert(syncB)  
-            print("using " , file.strip() ,  " answering: " , user)
-            print("AI:" ,syncB)
+            print("" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
             f.write("using " + file.strip() + " answering: " + user)
