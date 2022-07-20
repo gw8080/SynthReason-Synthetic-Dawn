@@ -46,15 +46,13 @@ def processB(data,file):
                 while(x < round(len(word)/entropy)):
                     totalA += word[x]
                     x+=1
-                stringA = text[text.find(totalA):text.find(" ",text.find(totalA)+1)]
                 x = round(len(word)/entropy)
                 totalB = ""
                 while(x < len(word)):
                     totalB += word[x]
                     x+=1
-                stringB = text[text.find(totalB):text.find(" ",text.find(totalB)+1)]
-                if string.find(" " + stringX + " ") > -1 or string.find(" " + totalA + " ") == -1:
-                    return string
+                    if string.find(" " + stringX + " ") > -1 or string.find(" " + totalA + " ") == -1:
+                        return string
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
