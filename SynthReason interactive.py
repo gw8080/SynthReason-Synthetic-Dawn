@@ -1,4 +1,4 @@
-# SynthReason - Synthetic Dawn - Expert knowledge system
+# SynthReason - Synthetic Dawn - Intelligent symbolic manipulation
 # BSD 2-Clause License
 # 
 # Copyright (c) 2022, gw8080 - George Wagenknecht
@@ -37,15 +37,15 @@ def processB(data,file):
         ini = random.randint(0,len(data))
         string = returnWords(data,ini,targetNgramSize)
         words = convert(string)
-        x = 0
         for word in words:
+            x = 0
             if x < len(word):
                 totalA = ""
                 while(x < round(len(word)/entropy)):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
-                if string.find(" " + word + " ") > -1 and string.find(" " + totalA + " ") == -1:
+                if string.find(" " + word + " ") >string.find( totalA):
                     return string
         return ""
 def convert(lst):
@@ -122,7 +122,8 @@ with open("fileList.conf", encoding='UTF-8') as f:
             print()
             syncB = formatSentences(sync)
             words = convert(syncB)  
-            print("" ,syncB)
+            print("using " , file.strip() ,  " answering: " , user)
+            print("AI:" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
             f.write("using " + file.strip() + " answering: " + user)
