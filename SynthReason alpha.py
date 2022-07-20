@@ -44,10 +44,12 @@ def processB(data,file):
             if x < len(word):
                 totalA = ""
                 while(x < round(len(word)/entropy)):
-                    totalA += word[x]
-                    x+=1
+                    if len(word[x]) == 1:
+                        totalA += word[x]
+                        x+=1
                 if string.find(" " + stringX + " ") > -1 or string.find(" " + totalA + " ") == -1:
                     return string
+        return ""
 def convert(lst):
     return (lst.split())
 def formatSentences(sync):
@@ -114,7 +116,9 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 stat = 0
                 if len(data) > 100:
                     ini = 1
-                    sync += processB(data,file.strip())
+                    check = processB(data,file.strip())
+                    if check is not None:
+                        sync += check
                     if len(convert(sync)) >= size and sync.find(".") > -1:
                             break
             print()
