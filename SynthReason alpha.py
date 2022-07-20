@@ -1,4 +1,4 @@
-#SynthReason - Synthetic Dawn - Expert knowledge system
+# SynthReason - Synthetic Dawn - Expert knowledge system
 # BSD 2-Clause License
 # 
 # Copyright (c) 2022, gw8080 - George Wagenknecht
@@ -36,8 +36,6 @@ def processB(data,file):
             text = f.read()
         ini = random.randint(0,len(data))
         string = returnWords(data,ini,targetNgramSize)
-        ini = random.randint(0,len(data))
-        stringX = returnWords(data,ini,targetNgramSize)
         words = convert(string)
         x = 0
         for word in words:
@@ -47,7 +45,7 @@ def processB(data,file):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
-                if string.find(" " + stringX + " ") > -1 or string.find(" " + totalA + " ") == -1:
+                if string.find(" " + word + " ") > -1 and string.find(" " + totalA + " ") == -1:
                     return string
         return ""
 def convert(lst):
