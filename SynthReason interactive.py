@@ -29,7 +29,7 @@ import re
 import math
 size = 100
 targetNgramSize = 3
-spread = 3
+spread = 1
 entropy = 2.5
 def processB(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
@@ -119,8 +119,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
                             break
             print()
             syncB = formatSentences(sync)
-            words = convert(syncB)  
-            print("using " , file.strip() ,  " answering: " , user)
+            words = convert(syncB)
             print("AI:" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
