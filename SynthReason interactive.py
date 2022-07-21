@@ -30,7 +30,7 @@ import math
 size = 100
 targetNgramSize = 3
 spread = 1
-entropy = 2.5
+entropy = 1.5
 def processB(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
