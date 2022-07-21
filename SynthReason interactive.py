@@ -29,7 +29,7 @@ import re
 import math
 size = 100
 targetNgramSize = 3
-spread = 1
+spread = 3
 entropy = 2.5
 def processB(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
@@ -37,10 +37,10 @@ def processB(data,file,ini):
         string = returnWords(data,ini,targetNgramSize)
         words = convert(string)
         for word in words:
-            x = 0
+            x = 1
             if x < len(word):
                 totalA = ""
-                while(x < round(len(word)/entropy)):
+                while(entropy < round(len(word)/x)):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
@@ -79,7 +79,7 @@ def process(user,file):
                 x+=1
             stringB = sentences[i][sentences[i].find(total):sentences[i].find(" ",sentences[i].find(total)+1)]
             if len(sentences[i]) > 0:
-                if user.find(" " + stringA + " ") > -1 or user.find(" " + stringB + " ") > -1:
+                if user.find(" " + word + " ") > -1 or user.find(" " + stringB + " ") > -1:
                     output += sentences[i] + "."
                     break
         i+=1
@@ -108,12 +108,11 @@ with open("fileList.conf", encoding='UTF-8') as f:
             counter = 0
             data = convert(process(user,file.strip()))
             sync = ""
-            rotate = random.randint(0,len(data))
             while(counter < size):
                 counter += 1
                 stat = 0
                 if len(data) > 100:
-                    check = processB(data,file.strip(),(counter*targetNgramSize)+rotate)
+                    check = processB(data,file.strip(),random.randint(0,len(data)))
                     if check is not None:
                         sync += check
                     if len(convert(sync)) >= size and sync.find(".") > -1:
@@ -121,6 +120,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
             print()
             syncB = formatSentences(sync)
             words = convert(syncB)  
+            print("using " , file.strip() ,  " answering: " , user)
             print("AI:" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
