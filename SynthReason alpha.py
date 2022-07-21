@@ -31,10 +31,9 @@ size = 100
 targetNgramSize = 3
 spread = 3
 entropy = 2.5
-def processB(data,file):     
+def processB(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
-        ini = random.randint(0,len(data))
         string = returnWords(data,ini,targetNgramSize)
         words = convert(string)
         for word in words:
@@ -109,12 +108,12 @@ with open("fileList.conf", encoding='UTF-8') as f:
             counter = 0
             data = convert(process(user,file.strip()))
             sync = ""
+            rotate = random.randint(0,len(data))
             while(counter < size):
                 counter += 1
                 stat = 0
                 if len(data) > 100:
-                    ini = 1
-                    check = processB(data,file.strip())
+                    check = processB(data,file.strip(),(counter*targetNgramSize)+rotate)
                     if check is not None:
                         sync += check
                     if len(convert(sync)) >= size and sync.find(".") > -1:
