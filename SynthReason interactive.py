@@ -40,7 +40,7 @@ def processB(data,file,ini):
             x = 1
             if x < len(word):
                 totalA = ""
-                while(entropy < round(len(word)/x)):
+                while(entropy == round(len(word)/x)):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
