@@ -27,7 +27,7 @@
 import random
 size = 100
 targetNgramSize = 3
-thoughtSignature = 5
+thoughtSignature = 10
 def process(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
@@ -71,11 +71,11 @@ with open("fileList.conf", encoding='UTF-8') as f:
                     n+=1
             print()
             print("AI:" ,sync)
-    print("using " , file.strip() ,  " answering: " , user)
-    f = open(filename, "a", encoding="utf8")
-    f.write("\n")
-    f.write("using " + file.strip() + " answering: " + user)
-    f.write("\n")
-    f.write(syncB)
-    f.write("\n")
-    f.close()
+            print("using " , file.strip() ,  " answering: " , user)
+            f = open(filename, "a", encoding="utf8")
+            f.write("\n")
+            f.write("using " + file.strip() + " answering: " + user)
+            f.write("\n")
+            f.write(syncB)
+            f.write("\n")
+            f.close()
