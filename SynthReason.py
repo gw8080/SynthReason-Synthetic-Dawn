@@ -76,6 +76,6 @@ with open("fileList.conf", encoding='UTF-8') as f:
             f.write("\n")
             f.write("using " + file.strip())
             f.write("\n")
-            f.write(syncB)
+            f.write(sync)
             f.write("\n")
             f.close()
