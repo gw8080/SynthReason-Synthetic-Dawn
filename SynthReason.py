@@ -71,10 +71,10 @@ with open("fileList.conf", encoding='UTF-8') as f:
                     n+=1
             print()
             print("AI:" ,sync)
-            print("using " , file.strip() ,  " answering: " , user)
+            print("using " , file.strip())
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
-            f.write("using " + file.strip() + " answering: " + user)
+            f.write("using " + file.strip())
             f.write("\n")
             f.write(syncB)
             f.write("\n")
