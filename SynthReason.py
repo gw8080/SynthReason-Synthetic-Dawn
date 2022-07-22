@@ -27,7 +27,7 @@
 import random
 size = 100
 targetNgramSize = 3
-thoughtSignature = 10
+thoughtSignature = 5
 def process(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
@@ -41,8 +41,8 @@ def process(data,file,ini):
                     if len(word[x]) == 1:
                         totalA += word[x]
                         x+=1
-                if string.find(" " + word + " ") >string.find( totalA):
-                    return string
+                    if string.find(" " + word + " ") >string.find( totalA):
+                        return string
         return ""
 def convert(lst):
     return (lst.split())
@@ -57,10 +57,10 @@ with open("fileList.conf", encoding='UTF-8') as f:
     files = f.readlines()
     print("SynthReason - Synthetic Dawn")
     filename = "Compendium#" + str(random.randint(0,10000000)) + ".txt"
-    sync = ""
     with open("fileList.conf", encoding='UTF-8') as f:
         files = f.readlines()
         for file in files:
+            sync = ""
             with open(file.strip(), encoding='UTF-8') as f:
                 data = convert(f.read())
             n=0
