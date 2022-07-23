@@ -1,4 +1,4 @@
-# SynthReason - Synthetic Dawn - Intelligent symbolic manpulation
+# SynthReason - Synthetic Dawn - Intelligent symbolic manipulation
 # BSD 2-Clause License
 # 
 # Copyright (c) 2022, gw8080 - George Wagenknecht
@@ -28,8 +28,8 @@ import random
 import re
 from numpy import random
 size = 100
-entropy = 4.5
-spread = 1
+entropy = 1.5
+spread = 3
 targetNgramSize = 3
 thoughtSignature = 10
 def process(thoughtSignature, data,file,ini):     
@@ -86,9 +86,9 @@ with open("fileList.conf", encoding='UTF-8') as f:
     	questions = f.readlines()
     filename = "Compendium#" + str(random.randint(0,10000000)) + ".txt"
     random.shuffle(questions)
-    while(True):
+    for question in questions:
         print()
-        user = re.sub('\W+',' ',input("USER: "))
+        user = re.sub('\W+',' ',question)
         stat = 0
         x = 0
         random.shuffle(files)
@@ -110,6 +110,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
             print()
             syncB = formatSentences(sync)
             words = convert(syncB)  
+            print("using " , file.strip() ,  " answering: " , user)
             print("AI:" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
