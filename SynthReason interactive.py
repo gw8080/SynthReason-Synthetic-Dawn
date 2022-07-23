@@ -100,7 +100,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 counter += 1
                 stat = 0
                 if len(data) > 100:
-                    db = random.uniform(1, 12, size=(4, 30))[0]
+                    db = random.uniform(1, 12, size=(4, 15))[0]
                     for element in db:        
                         check = process(round(element),data,file.strip(),random.randint(0,len(data)))
                         if check is not None:
