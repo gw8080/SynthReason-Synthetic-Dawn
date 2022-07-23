@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 from numpy import random
-size = 250
+size = 550
 targetNgramSize = 3
 thoughtSignature = 10
 def process(thoughtSignature, data,file,ini):     
@@ -66,7 +66,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 data = convert(f.read())
             n=0
             while(n < size):
-                x = random.uniform(1, 10, size=(1, 10))[0]
+                x = random.uniform(1, 12, size=(4, 30))[0]
                 for y in x:        
                     check = process(round(y),data,file.strip(),random.randint(0,len(data)))
                     if check is not None:
