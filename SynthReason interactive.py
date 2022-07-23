@@ -66,23 +66,10 @@ def gather(user,file):
     i = 1
     while(i < len(sentences)-2):
         words = convert(sentences[i])
-        for word in words:
-            x = 0
-            total = ""
-            while(x < round(len(word)/entropy)):
-                total += word[x]
-                x+=1
-            stringA = sentences[i][sentences[i].find(total):sentences[i].find(" ",sentences[i].find(total)+1)]
-            x = round(len(word)/entropy)
-            total = ""
-            while(x < len(word)):
-                total += word[x]
-                x+=1
-            stringB = sentences[i][sentences[i].find(total):sentences[i].find(" ",sentences[i].find(total)+1)]
-            if len(sentences[i]) > 0:
-                if user.find(" " + stringA + " ") > -1 or user.find(" " + stringB + " ") > -1:
+        if len(sentences[i]) > 0:
+            for word in words:
+                if user.find(" " + word + " ") > -1:
                     output += sentences[i] + "."
-                    break
         i+=1
     return output
 def returnWords(dataX,pos,length):
