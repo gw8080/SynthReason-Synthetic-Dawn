@@ -25,10 +25,11 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
-size = 100
+from numpy import random
+size = 250
 targetNgramSize = 3
-thoughtSignature = 4
-def process(data,file,ini):     
+thoughtSignature = 10
+def process(thoughtSignature, data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
         string = returnWords(data,ini,targetNgramSize)
@@ -65,10 +66,12 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 data = convert(f.read())
             n=0
             while(n < size):
-                check = process(data,file.strip(),random.randint(0,len(data)))
-                if check is not None:
-                    sync += check
-                    n+=1
+                x = random.uniform(1, 10, size=(1, 10))[0]
+                for y in x:        
+                    check = process(round(y),data,file.strip(),random.randint(0,len(data)))
+                    if check is not None:
+                        sync += check
+                        n+=1
             print()
             print("AI:" ,sync)
             f = open(filename, "a", encoding="utf8")
