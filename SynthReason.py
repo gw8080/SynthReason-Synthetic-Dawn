@@ -27,7 +27,7 @@
 import random
 size = 100
 targetNgramSize = 3
-thoughtSignature = 10
+thoughtSignature = 4
 def process(data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
