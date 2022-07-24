@@ -35,16 +35,16 @@ thoughtSignature = 10
 def process(thoughtSignature, data,file,ini):     
         with open(file, encoding='UTF-8') as f:
             text = f.read()
-        string = returnWords(data,ini,targetNgramSize)
+        string = returnWords(data,ini,thoughtSignature)
         words = convert(string)
         for word in words:
-            x = 1
-            totalA = ""
-            while(thoughtSignature != round(len(word)/x) and x < len(word)):
-                totalA += word[x]
-                x+=1
-                if string.find(" " + word + " ") >string.find( totalA) and x == string.find( totalA) :
-                    return string
+            x = len(word)
+            total = ""
+            while(x > 0 and round(len(word)/x) >0 and round(len(word)/x) < len(words)    ):
+                if total.find(words[round(len(word)/x)]) == -1:
+                    total += words[round(len(word)/x)] + " "            
+                x-=1
+            return total
         return ""
 def convert(lst):
     return (lst.split())
