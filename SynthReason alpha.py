@@ -100,7 +100,8 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 counter += 1
                 stat = 0
                 if len(data) > 100:
-                    db = numpy.random.uniform(0, 10, 15)
+                    words = convert(user)
+                    db = numpy.random.uniform(len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]))
                     for element in db:        
                         check = process(round(element),data,file.strip(),random.randint(0,len(data)))
                         if check is not None:
