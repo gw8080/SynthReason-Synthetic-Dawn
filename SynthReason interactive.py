@@ -43,7 +43,7 @@ def process(thoughtSignature, data,file,ini):
             while(thoughtSignature != round(len(word)/x) and x < len(word)):
                 totalA += word[x]
                 x+=1
-                if string.find(" " + word + " ") >string.find( totalA):
+                if string.find(" " + word + " ") >string.find( totalA) and x == string.find( totalA) :
                     return string
         return ""
 def convert(lst):
