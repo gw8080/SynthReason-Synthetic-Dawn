@@ -1,4 +1,4 @@
-# SynthReason - Synthetic Dawn - Intelligent symbolic manipulation
+# SynthReason - Synthetic Dawn - Expert knowledge system
 # BSD 2-Clause License
 # 
 # Copyright (c) 2022, gw8080 - George Wagenknecht
@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 import re
-from numpy import random
+import numpy
 size = 100
 entropy = 1.5
 spread = 3
@@ -100,7 +100,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
                 counter += 1
                 stat = 0
                 if len(data) > 100:
-                    db = random.uniform(1, 12, size=(4, 15))[0]
+                    db = numpy.random.uniform(0, 10, 15)
                     for element in db:        
                         check = process(round(element),data,file.strip(),random.randint(0,len(data)))
                         if check is not None:
