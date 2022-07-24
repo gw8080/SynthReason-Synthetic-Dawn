@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 import re
-from numpy import random
+import numpy
 size = 100
 entropy = 4.5
 spread = 1
