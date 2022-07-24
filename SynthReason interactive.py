@@ -39,14 +39,12 @@ def process(thoughtSignature, data,file,ini):
         words = convert(string)
         for word in words:
             x = 1
-            if x < len(word):
-                totalA = ""
-                while(thoughtSignature == round(len(word)/x)):
-                    if len(word[x]) == 1:
-                        totalA += word[x]
-                        x+=1
-                    if string.find(" " + word + " ") >string.find( totalA):
-                        return string
+            totalA = ""
+            while(thoughtSignature != round(len(word)/x) and x < len(word)):
+                totalA += word[x]
+                x+=1
+                if string.find(" " + word + " ") >string.find( totalA):
+                    return string
         return ""
 def convert(lst):
     return (lst.split())
