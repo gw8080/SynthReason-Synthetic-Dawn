@@ -38,11 +38,11 @@ def process(thoughtSignature, data,file,ini):
         string = returnWords(data,ini,thoughtSignature)
         words = convert(string)
         for word in words:
-            x = len(word)
+            x = len(words)
             total = ""
-            while(x > 0 and round(len(word)/x) >0 and round(len(word)/x) < len(words)    ):
-                if total.find(words[round(len(word)/x)]) == -1:
-                    total += words[round(len(word)/x)] + " "            
+            while(x > 0 and round(len(words)/x) >0 and round(len(words)/x) < len(words)    ):
+                if string.find(words[round(len(words)/x)]) >total.find(words[round(len(words)/x)]) and total.find(words[round(len(words)/x)]) == -1   :
+                    total += words[round(len(words)/x)] + " "          
                 x-=1
             return total
         return ""
@@ -62,12 +62,13 @@ def gather(user,file):
     sentences = text.split('.')
     output = ""
     i = 1
+    words = convert(user)
     while(i < len(sentences)-2):
-        words = convert(sentences[i])
         if len(sentences[i]) > 0:
             for word in words:
-                if user.find(" " + word + " ") > -1:
+                if sentences[i].find(" " + word + " ") > -1:
                     output += sentences[i] + "."
+                    break
         i+=1
     return output
 def returnWords(dataX,pos,length):
