@@ -40,10 +40,12 @@ def process(thoughtSignature, data,file,ini):
         for word in words:
             x = len(words)
             total = ""
-            while(x > 0 and round(len(words)/x) >0 and round(len(words)/x) < len(words)    ):
-                if string.find(words[round(len(words)/x)]) >total.find(words[round(len(words)/x)]) and total.find(words[round(len(words)/x)]) == -1   :
-                    total += words[round(len(words)/x)] + " "          
-                x-=1
+            db = numpy.random.uniform(len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]))
+            for element in db:        
+                while(x > 0 and round(len(db)/x) >0 and round(len(db)/element) < len(words)    ) and round(len(db)/x) <len(words):
+                    if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[round(len(db)/element)]) == -1   :
+                        total += string    
+                    x-=1
             return total
         return ""
 def convert(lst):
