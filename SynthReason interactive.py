@@ -1,4 +1,4 @@
-# SynthReason - Synthetic Dawn - Intelligent symbolic manpulation
+# SynthReason - Synthetic Dawn - Intelligent symbolic manipulation
 # BSD 2-Clause License
 # 
 # Copyright (c) 2022, gw8080 - George Wagenknecht
@@ -27,8 +27,9 @@
 import random
 import re
 import numpy
+from scipy.stats import binom 
 size = 100
-entropy = 4.5
+entropy = 1.5
 spread = 1
 targetNgramSize = 3
 thoughtSignature = 10
@@ -40,10 +41,13 @@ def process(thoughtSignature, data,file,ini):
         for word in words:
             x = len(words)
             total = ""
-            db = numpy.random.uniform(len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]))
-            for element in db:        
-                while(x > 0 and round(len(db)/x) >0 and round(len(db)/element) < len(words)    ) and round(len(db)/x) <len(words):
-                    if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[round(len(db)/element)]) == -1   :
+            n = 6
+            p = 0.6
+            r_values = list(range(n + 1)) 
+            dist = [binom.pmf(r, n, p) for r in r_values ]
+            for element in dist:
+                while(x > 0 and round(len(db)/x) >0 and round(len(db)/(element*10)) < len(words)  and round(len(db)/x) <len(words)):
+                    if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[ round(len(db)/(element*10))]) == -1   :
                         total += string    
                     x-=1
             return total
@@ -64,8 +68,8 @@ def gather(user,file):
     sentences = text.split('.')
     output = ""
     i = 1
+    words = convert(user)
     while(i < len(sentences)-2):
-        words = convert(user)
         if len(sentences[i]) > 0:
             for word in words:
                 if sentences[i].find(" " + word + " ") > -1:
@@ -112,6 +116,7 @@ with open("fileList.conf", encoding='UTF-8') as f:
             print()
             syncB = formatSentences(sync)
             words = convert(syncB)  
+            print("using " , file.strip() ,  " answering: " , user)
             print("AI:" ,syncB)
             f = open(filename, "a", encoding="utf8")
             f.write("\n")
