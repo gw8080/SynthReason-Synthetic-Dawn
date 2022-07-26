@@ -27,6 +27,7 @@
 import random
 import re
 import numpy
+from scipy.stats import binom 
 size = 100
 entropy = 1.5
 spread = 3
@@ -40,10 +41,13 @@ def process(thoughtSignature, data,file,ini):
         for word in words:
             x = len(words)
             total = ""
-            db = numpy.random.uniform(len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]), len(words[random.randint(0,len(words)-1)]))
-            for element in db:        
-                while(x > 0 and round(len(db)/x) >0 and round(len(db)/element) < len(words)    ) and round(len(db)/x) <len(words):
-                    if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[round(len(db)/element)]) == -1   :
+            n = 6
+            p = 0.6
+            r_values = list(range(n + 1)) 
+            dist = [binom.pmf(r, n, p) for r in r_values ]
+            for element in dist:
+                while(x > 0 and round(len(db)/x) >0 and round(len(db)/(element*10)) < len(words) and round(len(db)/x) <len(words)):
+                    if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[ round(len(db)/(element*10))]) == -1   :
                         total += string    
                     x-=1
             return total
