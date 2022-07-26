@@ -46,7 +46,7 @@ def process(thoughtSignature, data,file,ini):
             r_values = list(range(n + 1)) 
             dist = [binom.pmf(r, n, p) for r in r_values ]
             for element in dist:
-                while(x > 0 and round(len(db)/x) >0 and round(len(db)/(element*10)) < len(words)  and round(len(db)/x) <len(words)):
+                while(x > 0 and round(len(db)/x) >0 and round(len(db)/(element*10)) < len(words) and round(len(db)/x) <len(words)):
                     if string.find(words[round(len(db)/x)]) >total.find(words[round(len(db)/x)]) and total.find(words[ round(len(db)/(element*10))]) == -1   :
                         total += string    
                     x-=1
